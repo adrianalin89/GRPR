@@ -12,8 +12,6 @@ shipment:
         optional: true
 
   sales_shipment_grid:
-    provider:
-      where: " customer_email not like '%@muntz.nl' "
     columns:
       customer_email:
         formatter: email

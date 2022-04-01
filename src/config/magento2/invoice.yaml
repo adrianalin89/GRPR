@@ -12,8 +12,6 @@ invoice:
         optional: true
 
   sales_invoice_grid:
-    provider:
-      where: " customer_email not like '%@muntz.nl' "
     columns:
       customer_email:
         formatter: email

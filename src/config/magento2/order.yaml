@@ -1,7 +1,5 @@
 order:
   sales_order:
-    provider:
-      where: " customer_email not like '%@muntz.nl' "
     columns:
       customer_email:
         formatter: email
@@ -24,8 +22,6 @@ order:
         optional: true
 
   sales_order_grid:
-    provider:
-      where: " customer_email not like '%@muntz.nl' "
     columns:
       customer_email:
         formatter: email
@@ -43,8 +39,6 @@ order:
         formatter: address
 
   sales_order_address:
-    provider:
-      where: " email not like '%@muntz.nl' "
     columns:
       email:
         formatter: email

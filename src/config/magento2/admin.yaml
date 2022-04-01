@@ -2,6 +2,7 @@ admin:
   admin_user:
     pk: user_id
     provider:
+      delete: false
       where: " email not like '%@muntz.nl' "
     columns:
       firstname:

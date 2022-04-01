@@ -1,7 +1,5 @@
 customer:
   customer_entity:
-    provider:
-      where: " email not like '%@muntz.nl' "
     columns:
       email:
         formatter: email
@@ -47,8 +45,6 @@ customer:
         optional: true
 
   customer_grid_flat:
-    provider:
-      where: " email not like '%@muntz.nl' "
     columns:
       name:
         formatter: name

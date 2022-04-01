@@ -1,7 +1,5 @@
 quote:
   quote:
-    provider:
-      where: " customer_email not like '%@muntz.nl' "
     columns:
       customer_email:
         formatter: email
@@ -22,8 +20,6 @@ quote:
 
   quote_address:
     pk: address_id
-    provider:
-      where: " email not like '%@muntz.nl' "
     columns:
       email:
         formatter: email
