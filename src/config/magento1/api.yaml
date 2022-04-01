@@ -1,0 +1,20 @@
+api:
+  api_user:
+    pk: user_id
+    columns:
+      firstname:
+        formatter:
+        name: firstName
+      lastname:
+        formatter:
+        name: lastName
+      email:
+        formatter: email
+        nullColumnBeforeRun: true
+        unique: true
+      username:
+        formatter: firstName
+        nullColumnBeforeRun: true
+        unique: true
+      api_key:
+        formatter: password

@@ -1,0 +1,24 @@
+email:
+  email_contact:
+    pk: email_contact_id
+    provider:
+      where: " email not like '%@muntz.nl' "
+    columns:
+      email:
+        formatter: email
+
+  email_automation:
+    pk: id
+    provider:
+      where: " email not like '%@muntz.nl' "
+    columns:
+      email:
+        formatter: email
+
+  email_campaign:
+    pk: id
+    provider:
+      where: " email not like '%@muntz.nl' "
+    columns:
+      email:
+        formatter: email

@@ -1,0 +1,27 @@
+{
+  "name": "elgentos/masquerade",
+  "description": "Framework-agnostic database seeder with fake data",
+  "require": {
+    "php": "^7.4|^8",
+    "doctrine/dbal": "~3.2",
+    "elgentos/parser": "~3.0",
+    "illuminate/database": "^8.75",
+    "symfony/console": "^5.4",
+    "symfony/yaml": "^5.4",
+    "fakerphp/faker": "^1.17"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peter Jaap Blaakmeer",
+      "email": "peterjaap@elgentos.nl"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Elgentos\\": "src/Elgentos"
+    }
+  },
+  "bin": ["bin/masquerade"],
+  "minimum-stability": "stable"
+}

@@ -1,0 +1,27 @@
+{
+    "alias": "masquerade.phar",
+    "chmod": "0755",
+    "compactors": [
+        "Herrera\\Box\\Compactor\\Json",
+        "Herrera\\Box\\Compactor\\Php"
+    ],
+    "compression": "GZ",
+    "directories": [
+        "src"
+    ],
+    "finder": [
+        {
+            "name": "*.php",
+            "exclude": [
+                "Tests",
+                "doctrine/cache",
+                "doctrine/annotations",
+                "nesbot"
+            ],
+            "in": "vendor"
+        }
+    ],
+    "main": "bin/masquerade",
+    "output": "dist/masquerade.phar",
+    "stub": true
+}

@@ -1,0 +1,5 @@
+poll:
+  poll_vote:
+    ip_address:
+      formatter:
+        name: ipv4

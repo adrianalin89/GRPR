@@ -1,0 +1,3 @@
+platform: magento2
+host: localhost
+locale: nl_NL
