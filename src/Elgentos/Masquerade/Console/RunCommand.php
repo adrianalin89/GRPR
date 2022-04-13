@@ -335,6 +335,7 @@ class RunCommand extends Command
         $tempDbName = 'AnoTemp';
         $this->db->statement('DROP DATABASE IF EXISTS '.$tempDbName.';');
         $this->db->statement('CREATE DATABASE '.$tempDbName.';');
+        $this->db->statement("GRANT ALL PRIVILEGES ON ".$tempDbName.".* TO '".$username."'@'localhost';");
         exec('mysqldump '.$database.' | sed "s/\`'.$database.'\`./\`'.$tempDbName.'\`./" | mysql -D '.$tempDbName);
 
         $capsule = new Capsule;
