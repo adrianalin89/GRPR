@@ -141,7 +141,7 @@ class RunCommand extends Command
     private function export()
     {
         $databaseConfig = $this->configHelper->readConfigFile();
-        exec('mysqldump '.$databaseConfig['database'].' > ~/bk.sql');
+        exec('mysqldump -u '.$databaseConfig['username'].' -p'.$databaseConfig['password'].' '.$databaseConfig['database'].' > ~/bk.sql');
         //$this->db->statement('DROP DATABASE IF EXISTS AnoTemp;');
     }
 
@@ -333,10 +333,10 @@ class RunCommand extends Command
 
         $this->db = $capsule->getConnection();
         $tempDbName = 'AnoTemp';
+        $this->db->statement("GRANT ALL PRIVILEGES ON ".$tempDbName.".* TO '".$username."'@'localhost';");
         $this->db->statement('DROP DATABASE IF EXISTS '.$tempDbName.';');
         $this->db->statement('CREATE DATABASE '.$tempDbName.';');
-        $this->db->statement("GRANT ALL PRIVILEGES ON ".$tempDbName.".* TO '".$username."'@'localhost';");
-        exec('mysqldump '.$database.' | sed "s/\`'.$database.'\`./\`'.$tempDbName.'\`./" | mysql -D '.$tempDbName);
+        exec('mysqldump -u '.$username.' -p'.$password.' '.$database.' | sed "s/\`'.$database.'\`./\`'.$tempDbName.'\`./" | mysql -u '.$username.' -p'.$password.' -D '.$tempDbName);
 
         $capsule = new Capsule;
         $capsule->addConnection([
