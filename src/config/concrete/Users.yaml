@@ -1,0 +1,10 @@
+Users:
+    Users:
+        provider:
+            where: " uEmail not like '%@muntz.nl' "
+        columns:
+            uEmail:
+                formatter: email
+                unique: true
+
+

@@ -102,7 +102,8 @@ class RunCommand extends Command
             ->addOption('group', null, InputOption::VALUE_OPTIONAL, 'Which groups to run masquerade on [all]')
             ->addOption('charset', null, InputOption::VALUE_OPTIONAL, 'Database charset [utf8]')
             ->addOption('with-integrity', null, InputOption::VALUE_NONE, 'Run with foreign key checks enabled')
-            ->addOption('batch-size', null, InputOption::VALUE_REQUIRED, 'Batch size to use for anonymization', 500);
+            ->addOption('batch-size', null, InputOption::VALUE_REQUIRED, 'Batch size to use for anonymization', 500)
+            ->addOption('save-to', null, InputOption::VALUE_OPTIONAL, 'Add export location path', '.');
     }
 
     /**
@@ -133,7 +134,7 @@ class RunCommand extends Command
         }
 
         $this->output->success('Anonymization complete in [%s]', $startTime->diff(new \DateTime())->format('%h:%i:%s'));
-        $this->output->success('Db exported in ~/bk.sql');
+        $this->output->success('Db exported in '.rtrim($this->input->getOption('save-to'),'/').'/bk.sql');
         $this->export();
         return 0;
     }
@@ -141,8 +142,9 @@ class RunCommand extends Command
     private function export()
     {
         $databaseConfig = $this->configHelper->readConfigFile();
-        exec('mysqldump -u '.$databaseConfig['username'].' -p'.$databaseConfig['password'].' '.$databaseConfig['database'].' > ~/bk.sql');
-        //$this->db->statement('DROP DATABASE IF EXISTS AnoTemp;');
+        $tempDbName = 'masquerade_'.$databaseConfig['database'];
+        exec('mysqldump -u '.$databaseConfig['username'].' -p'.$databaseConfig['password'].' '.$tempDbName.' > '.rtrim($this->input->getOption('save-to'),'/').'/bk.sql');
+        $this->db->statement('DROP DATABASE IF EXISTS '.$tempDbName.';');
     }
 
     /**
@@ -332,7 +334,7 @@ class RunCommand extends Command
         ]);
 
         $this->db = $capsule->getConnection();
-        $tempDbName = 'AnoTemp';
+        $tempDbName = 'masquerade_'.$database;
         $this->db->statement("GRANT ALL PRIVILEGES ON ".$tempDbName.".* TO '".$username."'@'localhost';");
         $this->db->statement('DROP DATABASE IF EXISTS '.$tempDbName.';');
         $this->db->statement('CREATE DATABASE '.$tempDbName.';');
